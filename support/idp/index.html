@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<title>Design</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+<style>
+body {
+  background-color: #1f1f24;
+}
+
+.container {
+  overflow: hidden;
+  padding: 20px;
+}
+
+.info {
+  width: 300px;
+  float: left;
+  font-family: "Avenir", sans-serif;
+  margin-top: 30px;
+  text-rendering: optimizeLegibility;
+}
+
+.info h2 {
+  color: #727578;
+  font-size: 22px;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0;
+}
+
+.info h3 {
+  color: #525558;
+  font-weight: normal;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin: 10px 0 0;
+}
+
+.info p {
+  color: #525558;
+  font-size: 13px;
+  margin: 15px 0;
+}
+
+.lock-container {
+  float: left;
+  padding: 20px 0 60px 20px;
+}
+
+.control {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  background-color: #fff;
+  z-index: 1000000000000;
+}
+
+</style>
+<div id="control-container"></div>
+
+<div class="container">
+  <div class="info">
+    <h2>Classic</h2>
+    <p>
+      Use an @auth.com email to enable SSO.
+      <br />
+      Use an @rolodato.com email to enable HRD.
+    </p>
+
+  </div>
+  <div class="lock-container" id="classic-container"></div>
+</div>
+
+
+
+<script src="/build/lock.design.js"></script>
+<script>
+ var cid = "1";
+ var domain = "1";
+ var terms = "By signing up, you agree to our <a href='/terms' target='_new'>terms of service</a> and <a href='/privacy' target='_new'>privacy policy</a>.";
+
+ new Auth0Lock(cid, domain, {
+   allowedConnections: ["Username-Password-Authentication", "facebook", "twitter", "github", "auth0.com", "rolodato"],
+   auth: { redirect: false, sso: false },
+   container: "classic-container",
+   languageDictionary: {
+     signUpTerms: terms,
+     passwordStrength: { lengthAtLeast: "Au moins %d caractères" }
+   },
+   rememberLastLogin: false
+ }).show();
+
+</script>
